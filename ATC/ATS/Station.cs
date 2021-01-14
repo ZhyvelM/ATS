@@ -34,7 +34,7 @@ namespace ATC
 
         private void PortEventsInit(IPort port)
         {
-            port.Call += OnOutgoingCall;
+            port.Call += OnCall;
             port.Answer += OnAnswer;
             port.Drop += OnDrop;
             port.StateChanged += (sender, args) =>
@@ -43,7 +43,7 @@ namespace ATC
             };
         }
 
-        private void OnOutgoingCall(object sender, CallEventArgs args)
+        protected virtual void OnCall(object sender, CallEventArgs args)
         {
             var aimedPort = portsService.GetPortByNumber(args.AimedPhoneNumber);
             if (aimedPort != null)
@@ -60,14 +60,14 @@ namespace ATC
                 Console.WriteLine("no such number");
             }
         }
-        private void OnAnswer(object sender, CallEventArgs args)
+        protected virtual void OnAnswer(object sender, CallEventArgs args)
         {
             args.State = CallState.Processed;
             callsService.RegisterStartedCall(args);
             Console.WriteLine("callunswered");
         }
 
-        private void OnDrop(object sender, CallEventArgs args)
+        protected virtual void OnDrop(object sender, CallEventArgs args)
         {
             if (args.State == CallState.Processed)
             {

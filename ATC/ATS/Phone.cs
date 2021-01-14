@@ -24,22 +24,22 @@ namespace ATC
             Connection = new CallEventArgs() { SourcePhoneNumber = String.Empty, AimedPhoneNumber = String.Empty, State = CallState.Ununswered };
         }
 
-        private void OnOutgoingCall(object sender, CallEventArgs args)
+        protected virtual void OnOutgoingCall(object sender, CallEventArgs args)
         {
             OutgoingCall?.Invoke(sender,args);
         }
 
-        private void OnIncomingCall(object sender, CallEventArgs args)
+        protected virtual void OnIncomingCall(object sender, CallEventArgs args)
         {
             IncomingCall?.Invoke(sender, args);
         }
 
-        private void OnAnswer(object sender, CallEventArgs args)
+        protected virtual void OnAnswer(object sender, CallEventArgs args)
         {
             Answer?.Invoke(sender, args);
         }
 
-        private void OnDrop(object sender, CallEventArgs args)
+        protected virtual void OnDrop(object sender, CallEventArgs args)
         {
             Drop?.Invoke(sender, args);
         }

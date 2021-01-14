@@ -32,7 +32,7 @@ namespace ATC.ATS
             OnIncomingCall(this, connection);
         }
 
-        private void OnIncomingCall(object sender, CallEventArgs args)
+        protected virtual void OnIncomingCall(object sender, CallEventArgs args)
         {
             IncomingCall?.Invoke(sender, args);
         }
