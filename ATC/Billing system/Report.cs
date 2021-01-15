@@ -11,6 +11,24 @@ namespace ATC.Billing_system
         public IAbonent Abonent { get; set; }
         public ICollection<CallInfo> Calls { get; set; }
 
+        public string GetOrderedByAbonent()
+        {
+            Calls.OrderBy(x => x.To).ToList();
+            return this.ToString();
+        }
+
+        public string GetOrderedByCost()
+        {
+            Calls.OrderBy(x => x.Cost).ToList();
+            return this.ToString();
+        }
+
+        public string GetOrderedByDate()
+        {
+            Calls.OrderBy(x => x.ATSCall.CallDate).ToList();
+            return this.ToString();
+        }
+
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

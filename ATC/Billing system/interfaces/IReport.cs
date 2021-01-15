@@ -8,5 +8,10 @@ namespace ATC.Billing_system.interfaces
     {
         public IAbonent Abonent { get; set; }
         public ICollection<CallInfo> Calls { get; set; }
+
+        string GetOrderedByDate();
+        string GetOrderedByCost();
+        string GetOrderedByAbonent();
+
     }
 }
