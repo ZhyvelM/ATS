@@ -1,6 +1,7 @@
 ﻿using ATC.ATS;
 using ATC.ATS.interfaces;
 using ATC.Billing_system.interfaces;
+using ATC.Billing_system.Services;
 using ATC.Billing_system.Services.interfaces;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,20 @@ namespace ATC.Billing_system
     {
         private IAbonentsService abonentsService;
         private ICallsService callsService;
+
+        public BillingSystem()
+        {
+            abonentsService = new AbonentsService();
+            callsService = new CallsService();
+            CallServiceEventInit();
+        }
         public virtual void CallServiceEventInit()
         {
             callsService.PayWithdraw += OnPayWithdraw;
         }
 
         private void OnPayWithdraw(object sender, CallInfo call)
-        {
+        { 
             call.From.Balance -= call.Cost;
         }
 
