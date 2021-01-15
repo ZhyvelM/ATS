@@ -10,6 +10,8 @@ namespace ATC.ATS.Services
     {
         private ICollection<Call> calls;
 
+        public event EventHandler<Call> CallHappend;
+
         public CallsService()
         {
             calls = new List<Call>();

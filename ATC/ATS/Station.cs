@@ -64,7 +64,7 @@ namespace ATC
         {
             args.State = CallState.Processed;
             callsService.RegisterStartedCall(args);
-            Console.WriteLine("callunswered");
+            Console.WriteLine("call answered");
         }
 
         protected virtual void OnDrop(object sender, CallEventArgs args)
@@ -83,7 +83,7 @@ namespace ATC
             }
             else
             {
-                Console.WriteLine("reciver didn't unswer");
+                Console.WriteLine("reciver didn't answer");
             }
             args.SourcePhoneNumber = String.Empty;
             args.AimedPhoneNumber = String.Empty;
