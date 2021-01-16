@@ -25,33 +25,37 @@ namespace ATC.ATS.Services
                 To = args.AimedPhoneNumber,
                 CallDate = DateTime.Now,
                 Duration = TimeSpan.Zero,
-                State = CallState.Ununswered
+                State = CallState.Unanswered
             });
-            args.State = CallState.Ununswered;
+            args.State = CallState.Unanswered;
         }
 
         public void RegisterStartedCall(CallEventArgs args)
         {
             var call = calls.Where(x => x.From == args.SourcePhoneNumber && x.To == args.AimedPhoneNumber).FirstOrDefault();
-            if (call != null)
+            try
             {
-                call.CallDate = DateTime.Now;
+                call.Start();
                 args.State = CallState.Calling;
-                call.State = CallState.Calling;
+            }
+            catch(NullReferenceException)
+            {
+                Console.WriteLine("Can't find call");
             }
         }
 
         public void RegisterEndOfCall(CallEventArgs args)
         {
             var call = calls.Where(x => x.From == args.SourcePhoneNumber && x.To == args.AimedPhoneNumber).FirstOrDefault();
-            if (call != null)
+            try
             {
-                call.Duration = DateTime.Now - call.CallDate;
-
+                call.End();
                 args.State = CallState.Processed;
-                call.State = CallState.Processed;
-
                 calls.Remove(call);
+            }
+            catch (NullReferenceException)
+            {
+                Console.WriteLine("Can't find call");
             }
         }
     }

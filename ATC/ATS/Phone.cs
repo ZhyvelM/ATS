@@ -21,7 +21,7 @@ namespace ATC
 
         public Phone()
         {
-            Connection = new CallEventArgs() { SourcePhoneNumber = String.Empty, AimedPhoneNumber = String.Empty, State = CallState.Ununswered };
+            Connection = new CallEventArgs() { SourcePhoneNumber = String.Empty, AimedPhoneNumber = String.Empty, State = CallState.Unanswered };
         }
 
         protected virtual void OnOutgoingCall(object sender, CallEventArgs args)

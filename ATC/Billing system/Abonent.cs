@@ -16,5 +16,11 @@ namespace ATC
         {
             return $"Name: {Name} Balance: {Balance}";
         }
+
+        public override bool Equals(object obj)
+        {
+            var o1 = (Abonent)obj;
+            return this.Name.Equals(o1.Name);
+        }
     }
 }

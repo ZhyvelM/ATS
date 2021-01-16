@@ -13,19 +13,19 @@ namespace ATC.Billing_system
 
         public string GetOrderedByAbonent()
         {
-            Calls.OrderBy(x => x.To).ToList();
+            Calls = Calls.OrderBy(x => x.To).ToList();
             return this.ToString();
         }
 
         public string GetOrderedByCost()
         {
-            Calls.OrderBy(x => x.Cost).ToList();
+            Calls = Calls.OrderBy(x => x.Cost).ToList();
             return this.ToString();
         }
 
         public string GetOrderedByDate()
         {
-            Calls.OrderBy(x => x.ATSCall.CallDate).ToList();
+            Calls = Calls.OrderBy(x => x.ATSCall.CallDate).ToList();
             return this.ToString();
         }
 

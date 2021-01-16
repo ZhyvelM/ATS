@@ -25,20 +25,24 @@ namespace ATC.Billing_system.Services
 
         public void AddCall(CallInfo call)
         {
-            if (call != null)
+            try
             {
                 calls.Add(call);
+            }
+            catch(NullReferenceException)
+            {
+                Console.WriteLine("Can't add call");
             }
         }
 
         public ICollection<CallInfo> GetCallsForAbonent(IAbonent abonent)
         {
-            return calls.Where(x => x.From.Name == abonent.Name || x.To.Name == abonent.Name).ToList();
+            return calls.Where(x => x.From.Equals(abonent) || x.To.Equals(abonent)).ToList();
         }
 
         public ICollection<CallInfo> GetCallsForAbonentFrom(IAbonent abonent, DateTime from)
         {
-            return calls.Where(x => (x.From.Name == abonent.Name || x.To.Name == abonent.Name) && x.ATSCall.CallDate >= from).ToList();
+            return calls.Where(x => (x.From.Equals(abonent) || x.To.Equals(abonent)) && x.ATSCall.CallDate >= from).ToList();
         }
 
         public void PayForCall(CallInfo call)

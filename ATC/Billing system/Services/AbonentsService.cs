@@ -17,7 +17,7 @@ namespace ATC.Billing_system.Services
         }
         public void AddAbonent(IAbonent abonent)
         {
-            if (abonent != null && abonents.Where(x => x.Name == abonent.Name).FirstOrDefault() == null)
+            if (abonent != null && abonents.Where(x => x.Equals(abonent)).FirstOrDefault() == null)
             {
                 abonents.Add(abonent);
                 Console.WriteLine($"Abonent: {abonent.Name} added");

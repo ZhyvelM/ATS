@@ -8,6 +8,6 @@ namespace ATC.ATS
     {
         Calling,
         Processed,
-        Ununswered
+        Unanswered
     }
 }

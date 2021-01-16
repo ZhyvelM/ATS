@@ -29,7 +29,7 @@ namespace ATC.ATS
 
         public IPort GetFreePort()
         {
-            return availablePorts.FirstOrDefault(x => x.Value == String.Empty).Key;
+            return availablePorts.FirstOrDefault(x => x.Key.State == PortState.Free).Key;
         }
 
         public IPort GetPortByNumber(string number)
