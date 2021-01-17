@@ -87,6 +87,11 @@ namespace ATC
         private void OnDisconnect()
         {
             Disconnect?.Invoke(this, this);
+            OutgoingCall = null;
+            IncomingCall = null;
+            Answer = null;
+            Drop = null;
+            Disconnect = null;
         }
     }
 }
