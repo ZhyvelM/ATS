@@ -18,6 +18,7 @@ namespace ATC
         public event EventHandler<CallEventArgs> IncomingCall;
         public event EventHandler<CallEventArgs> Answer;
         public event EventHandler<CallEventArgs> Drop;
+        public event EventHandler<IPhone> Disconnect;
 
         public Phone()
         {
@@ -76,6 +77,16 @@ namespace ATC
         public void GetIncomingCall(CallEventArgs connection)
         {
             OnIncomingCall(this, connection);
+        }
+
+        public void DisconnectFromStation()
+        {
+            OnDisconnect();
+        }
+
+        private void OnDisconnect()
+        {
+            Disconnect?.Invoke(this, this);
         }
     }
 }

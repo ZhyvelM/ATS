@@ -16,11 +16,17 @@ namespace ATC.ATS
             availablePorts = new Dictionary<IPort, string>();
         }
 
+        private void OnDisconnect(object obj, IPhone phone)
+        {
+            availablePorts.FirstOrDefault(x => x.Value == phone.PhoneNumber).Key.State = PortState.Free;
+        }
+
         public void ConnectPhoneToPort(IPhone phone, IPort port)
         {
             if (port != null && phone != null)
             {
                 phone.Port = port;
+                phone.Disconnect += OnDisconnect;
                 port.PhoneEventsInit(phone);
                 port.State = PortState.Busy;
                 availablePorts.Add(port, phone.PhoneNumber);

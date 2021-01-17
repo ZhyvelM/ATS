@@ -45,6 +45,10 @@ namespace ATC
             abonent4.Phone.DropCall();
             abonent1.Phone.DropCall();
 
+            abonent1.Phone.DisconnectFromStation();
+
+            station.AddNewPhone(abonent1.Phone);
+
             IReport report1 = bilSys.GetReportForAbonent(abonent1);
             Console.WriteLine(report1.GetOrderedByAbonent());
         }

@@ -14,10 +14,12 @@ namespace ATC.ATS.interfaces
         event EventHandler<CallEventArgs> IncomingCall;
         event EventHandler<CallEventArgs> Answer;
         event EventHandler<CallEventArgs> Drop;
+        event EventHandler<IPhone> Disconnect;
 
         void Call(string number);
         void GetIncomingCall(CallEventArgs connection);
         void AnswerCall();
         void DropCall();
+        void DisconnectFromStation();
     }
 }
