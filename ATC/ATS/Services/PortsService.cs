@@ -29,7 +29,14 @@ namespace ATC.ATS
                 phone.Disconnect += OnDisconnect;
                 port.PhoneEventsInit(phone);
                 port.State = PortState.Busy;
-                availablePorts.Add(port, phone.PhoneNumber);
+                if (availablePorts.ContainsKey(port))
+                {
+                    availablePorts[port] = phone.PhoneNumber;
+                }
+                else
+                {
+                    availablePorts.Add(port, phone.PhoneNumber);
+                }
             }
         }
 

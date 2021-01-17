@@ -70,7 +70,7 @@ namespace ATC.Billing_system
             };
             if(args.Duration > TimeSpan.Zero)
             {
-                call.Cost = args.Duration.TotalSeconds * Tariff.CostPerMinute / 60;
+                call.Cost = args.Duration.TotalSeconds * Tariff.CostPerMinute;
                 callsService.PayForCall(call);
             }
             callsService.AddCall(call);
