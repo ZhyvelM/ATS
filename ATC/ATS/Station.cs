@@ -39,7 +39,7 @@ namespace ATC
             port.Drop += OnDrop;
             port.StateChanged += (sender, args) =>
             {
-                Console.WriteLine("port state changed");
+                Console.WriteLine($"port state changed to {port.State}");
             };
         }
 
@@ -62,23 +62,21 @@ namespace ATC
         }
         protected virtual void OnAnswer(object sender, CallEventArgs args)
         {
-            args.State = CallState.Processed;
+            args.State = CallState.Calling;
             callsService.RegisterStartedCall(args);
             Console.WriteLine("call answered");
         }
 
         protected virtual void OnDrop(object sender, CallEventArgs args)
         {
-            if (args.State == CallState.Processed)
+            var callerPort = portsService.GetPortByNumber(args.SourcePhoneNumber);
+            var aimedPort = portsService.GetPortByNumber(args.AimedPhoneNumber);
+
+            callerPort.State = PortState.Busy;
+            aimedPort.State = PortState.Busy;
+            if (args.State == CallState.Calling)
             {
-                var callerPort = portsService.GetPortByNumber(args.SourcePhoneNumber);
-                var aimedPort = portsService.GetPortByNumber(args.AimedPhoneNumber);
-
-                callerPort.State = PortState.Busy;
-                aimedPort.State = PortState.Busy;
-
                 callsService.RegisterEndOfCall(args);
-
                 Console.WriteLine("call ended");
             }
             else

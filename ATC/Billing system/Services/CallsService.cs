@@ -28,6 +28,7 @@ namespace ATC.Billing_system.Services
             try
             {
                 calls.Add(call);
+                Console.WriteLine("call processed");
             }
             catch(NullReferenceException)
             {

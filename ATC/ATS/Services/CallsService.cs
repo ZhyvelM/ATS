@@ -33,12 +33,11 @@ namespace ATC.ATS.Services
         public void RegisterStartedCall(CallEventArgs args)
         {
             var call = calls.Where(x => x.From == args.SourcePhoneNumber && x.To == args.AimedPhoneNumber).FirstOrDefault();
-            try
+            if (call != null)
             {
                 call.Start();
                 args.State = CallState.Calling;
-            }
-            catch(NullReferenceException)
+            }else
             {
                 Console.WriteLine("Can't find call");
             }
@@ -47,13 +46,16 @@ namespace ATC.ATS.Services
         public void RegisterEndOfCall(CallEventArgs args)
         {
             var call = calls.Where(x => x.From == args.SourcePhoneNumber && x.To == args.AimedPhoneNumber).FirstOrDefault();
-            try
+            if(call != null)
             {
-                call.End();
+                if (call.State == CallState.Calling)
+                {
+                    call.End();
+                }
+                CallHappend?.Invoke(this, call);
                 args.State = CallState.Processed;
                 calls.Remove(call);
-            }
-            catch (NullReferenceException)
+            }else
             {
                 Console.WriteLine("Can't find call");
             }

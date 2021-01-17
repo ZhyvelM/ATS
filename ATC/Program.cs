@@ -33,10 +33,20 @@ namespace ATC
             bilSys.RegisterAbonent(abonent3);
             bilSys.RegisterAbonent(abonent4);
 
+            abonent1.Phone.Call(phone3.PhoneNumber);
+            abonent3.Phone.AnswerCall();            
+            abonent2.Phone.Call(phone4.PhoneNumber);
+            abonent4.Phone.DropCall();
+            abonent1.Phone.DropCall();
+
             abonent1.Phone.Call(phone2.PhoneNumber);
-            abonent2.Phone.AnswerCall();
+            abonent2.Phone.AnswerCall();            
             abonent3.Phone.Call(phone4.PhoneNumber);
             abonent4.Phone.DropCall();
+            abonent1.Phone.DropCall();
+
+            IReport report1 = bilSys.GetReportForAbonent(abonent1);
+            Console.WriteLine(report1.GetOrderedByAbonent());
         }
     }
 }

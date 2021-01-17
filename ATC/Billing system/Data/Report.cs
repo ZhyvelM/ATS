@@ -13,7 +13,7 @@ namespace ATC.Billing_system
 
         public string GetOrderedByAbonent()
         {
-            Calls = Calls.OrderBy(x => x.To).ToList();
+            Calls = Calls.OrderBy(x => x.To.Name).ToList();
             return this.ToString();
         }
 
